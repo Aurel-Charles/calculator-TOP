@@ -1,0 +1,42 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+
+
+body{
+    background-color: rgb(37, 41, 54);
+    color: antiquewhite;
+}
+
+button{
+    font-size:xx-large;
+    width: 60px;
+    height: 60px;
+}
+
+#calculator{
+    display: flex;
+
+}
+
+#digits{
+    width: 180px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#operators{
+    margin-left: 5px;
+    width: 60px;
+    display: flex;
+    flex-direction: column;
+
+}
