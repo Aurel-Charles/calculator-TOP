@@ -15,15 +15,32 @@ body{
     color: antiquewhite;
 }
 
+h1{
+    text-align: center;
+    margin-bottom: 35px;
+}
+
 button{
     font-size:xx-large;
     width: 60px;
     height: 60px;
 }
+#result{
+    width: 180px;
+    height: 60px;
+    background-color: white;
+    color: black;
+}
 
 #calculator{
     display: flex;
+    justify-content: center;
 
+}
+
+#container{
+    display: flex;
+    flex-direction: column;
 }
 
 #digits{
