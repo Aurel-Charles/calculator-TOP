@@ -24,25 +24,26 @@ function divide(a, b) {
 // return the resul
 
 let firstNum 
-let secondtNum = 0
+let secondNum = 0
 let operator = ''
 let nextOperator = ''
 let result
+let operatorClickCheck = false
 
 
-function operate(firstNum, operator, secondtNum) {
+function operate(firstNum, operator, secondNum) {
     switch (operator) {
         case '+':
-            return (firstNum + secondtNum)
+            return (firstNum + secondNum)
             break;
         case '-':
-            return (firstNum - secondtNum)
+            return (firstNum - secondNum)
             break;
         case '*':
-            return (firstNum * secondtNum)
+            return (firstNum * secondNum)
             break;
         case '/':
-            return (firstNum / secondtNum)
+            return (firstNum / secondNum)
             break;
     }
 
@@ -69,6 +70,7 @@ function populateDisplay() {
             let newNumber = newArrNumber.join('')
             display.textContent = newNumber
             displayNumber = newNumber // store the new nember into the variable 'displayNumber'
+            operatorClickCheck = false
         })
     });
     
@@ -76,7 +78,7 @@ function populateDisplay() {
 
 populateDisplay()
 
-////// check the value of displayNumber
+////// check the value of displayNumber each time a btn number is pressed
 digitNum.forEach(element => {
         element.addEventListener('click', e => {
             console.log( 'DisplayNumber: ' + displayNumber);
@@ -91,65 +93,87 @@ digitNum.forEach(element => {
 const operatorBtn = document.querySelectorAll('.operator-btn')
 operatorBtn.forEach(element => {
     element.addEventListener('click', e => {
-        if (firstNum === undefined) {
+
+        if (firstNum === undefined && !operatorClickCheck) {
             firstNum = parseFloat(displayNumber)
             console.log('First num: ' + firstNum);
-            operator = e.target.textContent // define the first operator
+            if (e.target.textContent == 'x') {
+                operator = '*'
+            }else{
+                operator = e.target.textContent  // define the first operator
+            }
             console.log('Operator is: ' + operator);
             
             newArrNumber = [] //clean the array for the next number typed
             display.textContent = firstNum
+            operatorClickCheck = true
             
-        }else{
-            secondtNum = parseFloat(displayNumber) // asume first num is 0 so the number typed at first is actualy the secondNum
+        }else if (firstNum !== undefined && !operatorClickCheck){
+            secondNum = parseFloat(displayNumber) // asume first num is 0 so the number typed at first is actualy the secondNum
             if (e.target.textContent == 'x') {
                 nextOperator = '*'
             }else{
                 nextOperator = e.target.textContent
             }
-            result =  operate(firstNum, operator , secondtNum)
+            result =  operate(firstNum, operator , secondNum)
             console.log(operator);
             
-            console.log(`Operation is ${firstNum} ${operator} ${secondtNum} = ${result} `);
+            console.log(`Operation is ${firstNum} ${operator} ${secondNum} = ${result} `);
     
             newArrNumber = [] //clean the array for the next number typed
             firstNum = result // so on the next operatbtn click we add a secondNum
-            console.log('Result after click on operator btn: ' + result);
             operator = nextOperator
-            return display.textContent = result
+            operatorClickCheck = true
+            display.textContent = result
             
 
 
-        }
-
-
-
-
-        // return result
-        
+        }        
     })
 
 });
 
 
 
+const clearBtn = document.querySelector('.clear-btn')
+clearBtn.addEventListener('click', e => {
+    firstNum = undefined
+    console.log('FIRSTNum: ' + firstNum);
+    secondNum = undefined
+    console.log('SECONDNuM: ' + secondNum);
+    operator = ''
+    console.log('OPERATOR: ' + operator);
+    nextOperator = ''
+    console.log('NextOPERATOR: ' + nextOperator);
+    result = undefined
+    console.log('RESULT: ' + result);
+    display.textContent = 0
+    newArrNumber = [] //clean the array for the next number typed
+})
 
 
 
-
-// operatorBtn.forEach(element => {
-//         element.addEventListener('click', e => {
-
-                        
-//         console.log('Result= ' + result);                 
-//         })
-//     })
 
 
 const equalBtn = document.querySelector('.equal-btn')
 equalBtn.addEventListener('click', e => { 
-    console.log('equal btn clicked');
+    if (firstNum == undefined) {
+        firstNum == displayNumber
+    }else{
+        secondNum = parseFloat(displayNumber)
+        result = operate(firstNum, operator, secondNum)
+        console.log(`current opertion is: ${firstNum}${operator}${secondNum} = ${result}`);
+        newArrNumber = [] //clean the array for the next number typed
+        firstNum = undefined
+        return display.textContent = result
+    }
 })
+
+
+
+
+
+
 
 
 
@@ -165,3 +189,8 @@ equalBtn.addEventListener('click', e => {
 // entre second numero
 // click operator  resultat du premier calcul ,
 // entre un nouveau numero
+
+
+
+
+
