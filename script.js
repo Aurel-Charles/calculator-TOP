@@ -20,7 +20,7 @@ function divide(a, b) {
 }
 
 
-// calculator operation  num1 + operator + num2
+// calculator operation  digitNum1 + operator + digitNum2
 // return the resul
 
 let firstNum = 15
@@ -54,14 +54,14 @@ function operate(firstNum, operator, secondtNum) {
 // functions that populate the display
 
 
-const num = document.querySelectorAll('.digit-btn')
+const digitNum = document.querySelectorAll('.digit-btn')
 const display = document.querySelector('#result')
 
 let displayNumber = 0
 
 function populateDisplay() {
     let newArrNumber = []
-    num.forEach(element => {
+    digitNum.forEach(element => {
         element.addEventListener('click', e => {             
             newArrNumber.push(e.target.textContent)
             let newNumber = newArrNumber.join('')
@@ -74,11 +74,28 @@ function populateDisplay() {
 
 populateDisplay()
 
-
-num.forEach(element => {
+////// check the value of displayNumber
+digitNum.forEach(element => {
         element.addEventListener('click', e => {
             console.log( 'this is the displayNumber: ' + displayNumber);
                          
         })
     })
+/////
+
+
+
+const operatorBtn = document.querySelectorAll('.operator-btn')
+operatorBtn.forEach(element => {
+    element.addEventListener('click', e => {
+        console.log('operator btn clicked');
+        
+    })
+});
+
+
+const equalBtn = document.querySelector('.equal-btn')
+equalBtn.addEventListener('click', e => { console.log('equal btn clicked');
+})
+
 
