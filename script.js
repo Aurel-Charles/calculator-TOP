@@ -20,8 +20,7 @@ function divide(a, b) {
 }
 
 
-// calculator operation  digitNum1 + operator + digitNum2
-// return the resul
+// every variable of the calculatore
 
 let firstNum 
 let secondNum = 0
@@ -31,6 +30,7 @@ let result
 let operatorClickCheck = false
 
 
+// operate funtion 
 function operate(firstNum, operator, secondNum) {
     switch (operator) {
         case '+':
@@ -55,8 +55,6 @@ function operate(firstNum, operator, secondNum) {
 
 
 // functions that populate the display
-
-
 const digitNum = document.querySelectorAll('.digit-btn')
 const display = document.querySelector('#result')
 
@@ -78,19 +76,22 @@ function populateDisplay() {
 
 populateDisplay()
 
-////// check the value of displayNumber each time a btn number is pressed
+
+
+
+
+////// check the value of displayNumber each time a btn number is pressed ONLY FOR THE CONSOLE
 digitNum.forEach(element => {
         element.addEventListener('click', e => {
-            console.log( 'DisplayNumber to become the stored: ' + displayNumber);
-            // console.log( 'FirstNum: ' + firstNum);
-            // console.log( 'SecondNum: ' + secondNum);
-                         
+            console.log( 'DisplayNumber to become the stored: ' + displayNumber);                         
         })
     })
 /////
 
 
 
+
+// manage the event every time we click on a operator-btn
 const operatorBtn = document.querySelectorAll('.operator-btn')
 operatorBtn.forEach(element => {
     element.addEventListener('click', e => {
@@ -135,7 +136,7 @@ operatorBtn.forEach(element => {
 });
 
 
-
+// manage the event every time we click on the clear-btn
 const clearBtn = document.querySelector('.clear-btn')
 clearBtn.addEventListener('click', e => {
     firstNum = undefined
@@ -155,12 +156,12 @@ clearBtn.addEventListener('click', e => {
 
 
 
-
+// manage the event every time we click on the equal-btn
 const equalBtn = document.querySelector('.equal-btn')
 equalBtn.addEventListener('click', e => { 
     if (firstNum == undefined) {
         result = displayNumber
-        
+
     }else if (!operatorClickCheck){
         secondNum = parseFloat(displayNumber)
         result = operate(firstNum, operator, secondNum)
