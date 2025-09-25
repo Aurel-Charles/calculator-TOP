@@ -81,8 +81,9 @@ populateDisplay()
 ////// check the value of displayNumber each time a btn number is pressed
 digitNum.forEach(element => {
         element.addEventListener('click', e => {
-            console.log( 'DisplayNumber: ' + displayNumber);
-            console.log( 'FirstNum: ' + firstNum);
+            console.log( 'DisplayNumber to become the stored: ' + displayNumber);
+            // console.log( 'FirstNum: ' + firstNum);
+            // console.log( 'SecondNum: ' + secondNum);
                          
         })
     })
@@ -116,7 +117,7 @@ operatorBtn.forEach(element => {
                 nextOperator = e.target.textContent
             }
             result =  operate(firstNum, operator , secondNum)
-            console.log(operator);
+            console.log('Operator is: ' + operator);
             
             console.log(`Operation is ${firstNum} ${operator} ${secondNum} = ${result} `);
     
@@ -158,7 +159,8 @@ clearBtn.addEventListener('click', e => {
 const equalBtn = document.querySelector('.equal-btn')
 equalBtn.addEventListener('click', e => { 
     if (firstNum == undefined) {
-        firstNum == displayNumber
+        result = displayNumber
+        
     }else if (!operatorClickCheck){
         secondNum = parseFloat(displayNumber)
         result = operate(firstNum, operator, secondNum)
