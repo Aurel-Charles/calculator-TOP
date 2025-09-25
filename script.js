@@ -159,12 +159,13 @@ const equalBtn = document.querySelector('.equal-btn')
 equalBtn.addEventListener('click', e => { 
     if (firstNum == undefined) {
         firstNum == displayNumber
-    }else{
+    }else if (!operatorClickCheck){
         secondNum = parseFloat(displayNumber)
         result = operate(firstNum, operator, secondNum)
         console.log(`current opertion is: ${firstNum}${operator}${secondNum} = ${result}`);
         newArrNumber = [] //clean the array for the next number typed
         firstNum = undefined
+        operatorClickCheck = true
         return display.textContent = result
     }
 })
