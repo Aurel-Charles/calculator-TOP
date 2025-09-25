@@ -47,5 +47,38 @@ function operate(firstNum, operator, secondtNum) {
 
 }
 
-console.log(operate(firstNum, operator, secondtNum));
+
+
+
+
+// functions that populate the display
+
+
+const num = document.querySelectorAll('.digit-btn')
+const display = document.querySelector('#result')
+
+let displayNumber = 0
+
+function populateDisplay() {
+    let newArrNumber = []
+    num.forEach(element => {
+        element.addEventListener('click', e => {             
+            newArrNumber.push(e.target.textContent)
+            let newNumber = newArrNumber.join('')
+            display.textContent = newNumber
+            displayNumber = newNumber // store the new nember into the variable 'displayNumber'
+        })
+    });
+    
+}
+
+populateDisplay()
+
+
+num.forEach(element => {
+        element.addEventListener('click', e => {
+            console.log( 'this is the displayNumber: ' + displayNumber);
+                         
+        })
+    })
 
