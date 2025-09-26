@@ -28,29 +28,30 @@ function roundResult(num) {
 
 let firstNum 
 let secondNum = 0
-let operator = ''
-let nextOperator = ''
+let operator 
+let nextOperator 
 let result
-let operatorClickCheck = false
+let operatorAvailable = true // to allow operator to operate
+let pointAvailable = true // to allow only one '.'
 
 
 // operate funtion 
 function operate(firstNum, operator, secondNum) {
     switch (operator) {
         case '+':
-            return roundResult((firstNum + secondNum))
+            return roundResult((Number(firstNum) + Number(secondNum)))
             break;
         case '-':
-            return roundResult((firstNum - secondNum))
+            return roundResult((Number(firstNum) - Number(secondNum)))
             break;
-        case '*':
-            return roundResult((firstNum * secondNum))
+        case 'x':
+            return roundResult((Number(firstNum) * Number(secondNum)))
             break;
         case '/':
             if (secondNum == 0) {
                 return "ERROR"
             }else{
-                return roundResult((firstNum / secondNum))
+                return roundResult((Number(firstNum) / Number(secondNum)))
             }
             break;
     }
@@ -66,17 +67,36 @@ function operate(firstNum, operator, secondNum) {
 const digitNum = document.querySelectorAll('.digit-btn')
 const display = document.querySelector('#result')
 
+
 let displayNumber = 0
 let newArrNumber = [] // array to concatenate each number pushed in it
 
 function populateDisplay() {
     digitNum.forEach(element => {
-        element.addEventListener('click', e => {             
-            newArrNumber.push(e.target.textContent)
-            let newNumber = newArrNumber.join('')
-            display.textContent = newNumber
-            displayNumber = newNumber // store the new nember into the variable 'displayNumber'
-            operatorClickCheck = false
+        element.addEventListener('click', e => {
+            console.log(e.target.textContent);
+            console.log(pointAvailable);
+            
+            if (e.target.textContent == '.' && pointAvailable) {
+                newArrNumber.push(e.target.textContent)
+                let newNumber = newArrNumber.join('')
+                display.textContent = newNumber
+                displayNumber = Number(newNumber) // store the new number into the variable 'displayNumber'
+                console.log('Number on the display: ' + displayNumber);
+                operatorAvailable = true
+                pointAvailable = false 
+            }else if (e.target.textContent == '.' && !pointAvailable) {
+                return             
+            }else if (e.target.textContent != '.') {
+                newArrNumber.push(e.target.textContent)
+                let newNumber = newArrNumber.join('')
+                display.textContent = newNumber
+                displayNumber = Number(newNumber) // store the new number into the variable 'displayNumber'
+                console.log('Number on the display: ' + displayNumber);
+                operatorAvailable = true
+            }
+
+            
         })
     });
     
@@ -88,13 +108,13 @@ populateDisplay()
 
 
 
-////// check the value of displayNumber each time a btn number is pressed ONLY FOR THE CONSOLE
-digitNum.forEach(element => {
-        element.addEventListener('click', e => {
-            console.log( 'DisplayNumber to become the stored: ' + displayNumber);                         
-        })
-    })
-/////
+// ////// check the value of displayNumber each time a btn number is pressed ONLY FOR THE CONSOLE
+// digitNum.forEach(element => {
+//         element.addEventListener('click', e => {
+//             console.log( 'DisplayNumber to become the stored: ' + displayNumber);                         
+//         })
+//     })
+// /////
 
 
 
@@ -102,43 +122,37 @@ digitNum.forEach(element => {
 // manage the event every time we click on a operator-btn
 const operatorBtn = document.querySelectorAll('.operator-btn')
 operatorBtn.forEach(element => {
-    element.addEventListener('click', e => {
-
-        if (firstNum === undefined && !operatorClickCheck) {
+    element.addEventListener('click', e => {   
+        if (firstNum === undefined && operatorAvailable) {
+            operator = e.target.textContent
             firstNum = parseFloat(displayNumber)
             console.log('First num: ' + firstNum);
-            if (e.target.textContent == 'x') {
-                operator = '*'
-            }else{
-                operator = e.target.textContent  // define the first operator
-            }
             console.log('Operator is: ' + operator);
             
             newArrNumber = [] //clean the array for the next number typed
-            display.textContent = firstNum
-            operatorClickCheck = true
+            firstNum = display.textContent 
+            operatorAvailable = false
             
-        }else if (firstNum !== undefined && !operatorClickCheck){
-            secondNum = parseFloat(displayNumber) // asume first num is 0 so the number typed at first is actualy the secondNum
-            if (e.target.textContent == 'x') {
-                nextOperator = '*'
-            }else{
-                nextOperator = e.target.textContent
-            }
+        }else if (firstNum !== undefined && operatorAvailable){
+            nextOperator = e.target.textContent
+            secondNum = parseFloat(displayNumber)
             result =  operate(firstNum, operator , secondNum)
-            console.log('Operator is: ' + operator);
             
+            console.log('Operator is: ' + operator);
             console.log(`Operation is ${firstNum} ${operator} ${secondNum} = ${result} `);
+            console.log('Next operator is: ' + nextOperator);
+            
     
             newArrNumber = [] //clean the array for the next number typed
             firstNum = result // so on the next operatbtn click we add a secondNum
             operator = nextOperator
-            operatorClickCheck = true
+            operatorAvailable = false
             display.textContent = result
-            
-
-
-        }        
+        }else if (firstNum !== undefined && !operatorAvailable) {
+            operator = e.target.textContent
+            console.log( 'New operator set: ' + operator); 
+        }
+        pointAvailable = true
     })
 
 });
@@ -151,12 +165,14 @@ clearBtn.addEventListener('click', e => {
     console.log('FIRSTNum: ' + firstNum);
     secondNum = undefined
     console.log('SECONDNuM: ' + secondNum);
-    operator = ''
+    operator = undefined
     console.log('OPERATOR: ' + operator);
-    nextOperator = ''
+    nextOperator = undefined
     console.log('NextOPERATOR: ' + nextOperator);
     result = undefined
     console.log('RESULT: ' + result);
+    operatorAvailable = true
+    pointAvailable = true
     display.textContent = 0
     newArrNumber = [] //clean the array for the next number typed
 })
@@ -167,19 +183,40 @@ clearBtn.addEventListener('click', e => {
 // manage the event every time we click on the equal-btn
 const equalBtn = document.querySelector('.equal-btn')
 equalBtn.addEventListener('click', e => { 
+    console.log(operatorAvailable);
+    
     if (firstNum == undefined) {
         result = displayNumber
 
-    }else if (!operatorClickCheck){
+    }else if (operatorAvailable){
         secondNum = parseFloat(displayNumber)
         result = operate(firstNum, operator, secondNum)
         console.log(`current opertion is: ${firstNum}${operator}${secondNum} = ${result}`);
         newArrNumber = [] //clean the array for the next number typed
         firstNum = undefined
-        operatorClickCheck = true
+        operatorAvailable = false
+        pointAvailable = true
         return display.textContent = result
     }
 })
+
+
+
+// manage the event every time we click on the backspace-btn
+const backspaceBtn = document.querySelector('.backspace-btn')
+backspaceBtn.addEventListener('click', e => {
+    if (newArrNumber[newArrNumber.length] == '.' ) {
+        pointAvailable == true
+    }
+    newArrNumber.pop()
+    let newNumber = newArrNumber.join('')
+    display.textContent = newNumber
+    displayNumber = Number(newNumber) // store the new number into the variable 'displayNumber'
+    console.log('Number on the display: ' + displayNumber);
+
+    
+})
+
 
 
 
