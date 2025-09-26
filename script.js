@@ -19,6 +19,10 @@ function divide(a, b) {
     return a / b
 }
 
+function roundResult(num) {
+    return Math.round(1000*num)/1000
+}
+
 
 // every variable of the calculatore
 
@@ -34,16 +38,20 @@ let operatorClickCheck = false
 function operate(firstNum, operator, secondNum) {
     switch (operator) {
         case '+':
-            return (firstNum + secondNum)
+            return roundResult((firstNum + secondNum))
             break;
         case '-':
-            return (firstNum - secondNum)
+            return roundResult((firstNum - secondNum))
             break;
         case '*':
-            return (firstNum * secondNum)
+            return roundResult((firstNum * secondNum))
             break;
         case '/':
-            return (firstNum / secondNum)
+            if (secondNum == 0) {
+                return "ERROR"
+            }else{
+                return roundResult((firstNum / secondNum))
+            }
             break;
     }
 
@@ -172,6 +180,7 @@ equalBtn.addEventListener('click', e => {
         return display.textContent = result
     }
 })
+
 
 
 
