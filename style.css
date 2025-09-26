@@ -20,10 +20,11 @@ h1{
     margin-bottom: 35px;
 }
 
-button{
+#digits button{
     font-size:xx-large;
     width: 60px;
     height: 60px;
+    border: solid 3px black;
 }
 
 span{
@@ -35,7 +36,7 @@ span{
 #result{
     width: 180px;
     height: 50px;
-    margin: 5px 0;
+    margin: 0 0 10px 0;
     border-radius: 15px;
     background-color: white;
     color: black;
@@ -49,6 +50,11 @@ span{
 #calculator{
     display: flex;
     justify-content: center;
+    width: 270px;
+    height: 320px;
+    justify-self: center;
+    align-items: center;
+    background-color: rgb(27, 91, 147);
 
 }
 
@@ -71,4 +77,17 @@ span{
     display: flex;
     flex-direction: column;
 
+}
+
+#operators button{
+    background-color: rgb(234, 179, 51);
+    font-size:xx-large;
+    width: 60px;
+    height: 50px;
+    border-radius: 30px;
+
+}
+
+.clear-btn {
+    background-color: rgb(183, 183, 183);
 }
