@@ -2,30 +2,25 @@ console.log('%c Calculator ', 'background: #4a64c3ff; color: #fff700ff');
 
 
 // basic math function operator
-
 function add(a, b) {
     return a + b
 }
-
 function substract(a, b) {
     return a - b
 }
-
 function multipply(a, b) {
     return a * b
 }
-
 function divide(a, b) {
     return a / b
 }
-
 function roundResult(num) {
     return Math.round(1000*num)/1000
 }
 
 
-// every variable of the calculatore
 
+// every variable of the calculatore
 let firstNum 
 let secondNum = 0
 let operator 
@@ -35,7 +30,7 @@ let operatorAvailable = true // to allow operator to operate
 let pointAvailable = true // to allow only one '.'
 
 
-// operate funtion 
+// operate function 
 function operate(firstNum, operator, secondNum) {
     switch (operator) {
         case '+':
@@ -58,8 +53,6 @@ function operate(firstNum, operator, secondNum) {
             }
             break;
     }
-
-
 }
 
 
@@ -70,11 +63,9 @@ function operate(firstNum, operator, secondNum) {
 const digitBtn = document.querySelectorAll('.digit-btn')
 const display = document.querySelector('#result')
 
-
 let displayNumber = 0
-let newArrNumber = [] // array to concatenate each number pushed in it
+let newArrNumber = [] // array to concatenate each number pushed in it to become what will be displayed
 
-// this function populate the display
 function populateDisplay(arrValue) {
     if (newArrNumber.length == 10) {
         return
@@ -160,7 +151,7 @@ function operatorTrigged(operatorTrigged) {
 }
 
 
-// manage the event every time we CLICK on a operator-btn
+// SET an operator / manage the event every time we CLICK on a operator-btn
 const operatorBtn = document.querySelectorAll('.operator-btn')
 operatorBtn.forEach(element => {
     element.addEventListener('click', e => {   
@@ -168,7 +159,7 @@ operatorBtn.forEach(element => {
     })
 });
 
-// manage the event every time we TYPE  on a operator-btn
+// SET an operator / manage the event every time we TYPE  on a operator-btn
 document.addEventListener('keypress', function (event) {
     let arrDigit = ['+', '-', "*",'x', '/']
     for (let i = 0; i < arrDigit.length; i++) {
@@ -205,6 +196,7 @@ clearBtn.addEventListener('click', e => {
 
 
 //////////////////////////////////////////////////////////////////////////////////////////
+// Equal Handler part
 function equal() {
     console.log(operatorAvailable);
     
