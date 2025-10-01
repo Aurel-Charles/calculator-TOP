@@ -13,18 +13,28 @@ html {
 body{
     background-color: rgb(43, 41, 52);
     color: antiquewhite;
+    display: flex;
+    justify-content: center;
+    align-content: center;
 }
 
 h1{
-    text-align: center;
-    margin-bottom: 35px;
+    padding: 15px 0 15px 0;
+    margin-top: 0;
+    border-bottom: solid 3px rgb(0, 0, 92);
+    border-radius: 8px 8px 0 0;
+    background-color: rgb(32, 143, 143);
+    display: flex;
+    flex: auto;
+    justify-content: center;
 }
 
 #digits button{
     font-size:xx-large;
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     border-radius: 12px;
+    margin: 5px;
 }
 
 span{
@@ -48,15 +58,21 @@ span{
 }
 
 #calculator{
+    
     display: flex;
-    justify-content: center;
-    width: 270px;
-    height: 320px;
+    width: 300px;
+    flex-wrap: wrap;
+    padding: 0 0 30px 0;
     justify-self: center;
+    justify-content: center;
     align-items: center;
     background-color: rgb(27, 91, 147);
+    border-radius: 8px 8px 20px 20px;
+    margin-top: 30px;
 
 }
+
+
 
 #container{
     display: flex;
@@ -72,22 +88,27 @@ span{
 
 
 #operators{
-    margin-left: 5px;
+
     width: 60px;
     display: flex;
     flex-direction: column;
+    align-items: end;
 
 }
 
 #operators button{
     background-color: rgb(234, 179, 51);
     font-size:xx-large;
-    width: 60px;
-    height: 50px;
-    border-radius: 30px;
-
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin: 2.5px;
 }
 
 .clear-btn {
     background-color: rgb(183, 183, 183);
+}
+
+.backspace-btn{
+    color: black;
 }
