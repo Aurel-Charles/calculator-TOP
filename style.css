@@ -97,6 +97,7 @@ span{
 }
 
 #operators button{
+    color: black;
     background-color: rgb(234, 179, 51);
     font-size:xx-large;
     width: 45px;
