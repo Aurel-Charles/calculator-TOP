@@ -44,6 +44,11 @@ span{
 }
 
 #result{
+    overflow: scroll;
+
+}
+
+#screen{
     width: 180px;
     height: 50px;
     margin: 0 0 10px 0;
